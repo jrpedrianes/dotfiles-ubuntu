@@ -1,0 +1,32 @@
+{{- $name := "Jorge Rodríguez Pedrianes" -}}
+{{- $email := "jrpedrianes@gmail.com" -}}
+
+{{- $chezmoiForce := or (has "--force" .chezmoi.args) (has "--force=true" .chezmoi.args) -}}
+{{- $interactive := and stdinIsATTY (not $chezmoiForce) -}}
+
+{{- $ubuntu := hasKey .chezmoi.osRelease "ubuntuCodename" -}}
+{{- $gnome := lookPath "gnome-shell" | not | not -}}
+{{- $headless := or (env "SSH_CLIENT" | not | not) (not (or (env "DISPLAY") (env "WAYLAND_DISPLAY"))) -}}
+
+{{- /* This retains the value passed with --source on chezmoi init, which is used in the ../install.sh script */ -}}
+sourceDir: "{{ .chezmoi.workingTree }}"
+
+verbose: true
+
+{{ if stdinIsATTY -}}
+progress: auto
+{{- end }}
+
+diff:
+  exclude:
+    - scripts
+status:
+  exclude:
+    - always
+
+{{/* Here we "export" the variables, so we can access them outside this file */ -}}
+data:
+  is_gnome: {{ $gnome }}
+
+  name: "{{ $name }}"
+  email: "{{ $email }}"
