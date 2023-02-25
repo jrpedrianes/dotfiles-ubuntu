@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# {{ template "scripts-library" }}
+
+# The following line is for ShellCheck to correctly identify the above included library
+true || source ../.chezmoitemplates/scripts-library
+
+version="1.5.0"
+
+is_pkg_installed=$(dpkg-query -W --showformat='${Status}:${Version}\n' input-remapper)
+current_version=$(echo "${is_pkg_installed}" | cut -d":" -f2)
+
+if [[ "${is_pkg_installed}" != "install ok installed"* ]] || [[ "${current_version}" != "${version}" ]]; then
+  wget "https://github.com/sezanzeb/input-remapper/releases/download/${version}/input-remapper-${version}_all.deb" --directory-prefix=/tmp/
+
+  log_task "Installing input-remapper - ${version}"
+  c sudo apt install --yes --install-recommends "/tmp/input-remapper-${version}.deb"
+
+  rm -rf "/tmp/input-remapper-${version}_all.deb"
+fi
