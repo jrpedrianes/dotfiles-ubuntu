@@ -119,6 +119,9 @@ plugins=(
   zsh-syntax-highlighting
   zsh-autosuggestions
   1password
+  mvn
+  asdf
+  doctl
 )
 
 # https://github.com/zsh-users/zsh-completions/issues/603
@@ -133,3 +136,9 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Configure 1Password plugins
+[[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
+
+# Load custom shell
+[[ ! -f ~/.shell-env ]] || source ~/.shell-env

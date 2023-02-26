@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# `aliases` is used to provide custom variables.
+#
+# This file is used as a part of `.shell-env`
+
+
+# === Aliases ===
+
+# Digital Ocean
+function _doctl_command () {
+  # _doctl completion function call to doctl bin to get the completion suggestion using the command "__complete"
+  if [[ "$1" == "__complete" ]]; then
+    "${HOME}/.local/bin/doctl" $@ ""
+  else
+    op run --env-file="${HOME}/.config/op/doctl.env" -- "${HOME}/.local/bin/doctl" $@
+  fi
+}
+
+alias doctl="_doctl_command"
+compdef _doctl _doctl_command

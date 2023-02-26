@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+# {{ template "scripts-library" }}
+
+# The following line is for ShellCheck to correctly identify the above included library
+true || source ../.chezmoitemplates/scripts-library
+
+readonly wanted_plugins=(
+  java
+  nodejs
+)
+missing_plugins=()
+
+asdf_dir="${HOME}/.asdf"
+
+for plugin in "${wanted_plugins[@]}"; do
+  if [[ ! -d "${asdf_dir}/plugins/${plugin}" ]]; then
+    log_task "Adding asdf pluing ${plugin}"
+
+    "${asdf_dir}"/bin/asdf plugin add "${plugin}"
+  fi
+done
+

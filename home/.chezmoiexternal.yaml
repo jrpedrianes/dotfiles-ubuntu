@@ -34,6 +34,14 @@
   stripComponents: 1
   exact: true
 
+".local/bin/doctl":
+  type: file
+  url: "https://github.com/digitalocean/doctl/releases/download/v{{ template "get-github-latest-version" list "digitalocean/doctl" $cache }}/doctl-{{ template "get-github-latest-version" list "digitalocean/doctl" $cache }}-linux-{{ .chezmoi.arch }}.tar.gz"
+  filter:
+    command: tar
+    args: ["-x", "-z", "-O", "doctl"]
+  executable: true
+
 # Downloads all the variants of Fira Code Nerd Font
 {{-   range $_, $face := list "Regular" "Light" "Medium" "Bold" "Retina" "SemiBold" -}}
 {{-     range $_, $variant := list "" " Mono" }}

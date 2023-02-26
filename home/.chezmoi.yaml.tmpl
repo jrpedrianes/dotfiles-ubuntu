@@ -29,3 +29,5 @@ data:
 
   name: "{{ $name }}"
   email: "{{ $email }}"
+
+  uname_arch: "{{ output "uname" "-m" | trim }}"
