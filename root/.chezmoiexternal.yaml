@@ -3,6 +3,13 @@
 
 {{- template "read-versions-and-revisions-cache" $cache -}}
 
+"usr/share/keyrings/docker-archive-keyring.gpg":
+  type: file
+  url: "https://download.docker.com/linux/{{ .chezmoi.osRelease.id }}/gpg"
+  filter:
+    command: gpg
+    args: ["--dearmor"]
+
 "usr/share/keyrings/google-chrome-archive-keyring.gpg":
   type: file
   url: "https://dl.google.com/linux/linux_signing_key.pub"
@@ -16,5 +23,10 @@
   filter:
     command: gpg
     args: ["--dearmor"]
+
+"usr/bin/docker-credential-secretservice":
+  type: file
+  url: "https://github.com/docker/docker-credential-helpers/releases/download/v{{ template "get-github-latest-version" list "docker/docker-credential-helpers" $cache }}/docker-credential-secretservice-v{{ template "get-github-latest-version" list "docker/docker-credential-helpers" $cache }}.linux-{{ .chezmoi.arch }}"
+  executable: true
 
 {{ template "save-versions-and-revisions-cache" $cache -}}
