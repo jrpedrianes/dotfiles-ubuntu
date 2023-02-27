@@ -122,6 +122,7 @@ plugins=(
   mvn
   asdf
   doctl
+  chezmoi
 )
 
 # https://github.com/zsh-users/zsh-completions/issues/603
