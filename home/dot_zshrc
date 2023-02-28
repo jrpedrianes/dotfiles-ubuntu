@@ -114,6 +114,7 @@ plugins=(
   npm
   command-not-found
   common-aliases
+  httpie
   ubuntu
   sudo
   zsh-syntax-highlighting
@@ -142,6 +143,9 @@ fi
 
 # Configure 1Password plugins
 [[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
+
+# Load kubectl switcher. https://github.com/danielfoehrKn/kubeswitch
+[[ ! -f ~/.config/kubeswitch/switch.sh ]] || source ~/.config/kubeswitch/switch.sh
 
 # Load custom shell
 [[ ! -f ~/.shell-env ]] || source ~/.shell-env

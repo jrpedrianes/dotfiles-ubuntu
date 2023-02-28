@@ -7,6 +7,11 @@
 
 # === Aliases ===
 
+# kubecolor
+alias kubectl="kubecolor"
+# make completion work with kubecolor
+compdef kubecolor=kubectl
+
 # Digital Ocean
 function _doctl_command () {
   # _doctl completion function call to doctl bin to get the completion suggestion using the command "__complete"
