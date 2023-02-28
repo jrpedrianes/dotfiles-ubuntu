@@ -31,6 +31,13 @@
     command: gpg
     args: ["--dearmor"]
 
+"usr/share/keyrings/spotify.gpg":
+  type: file
+  url: "https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg"
+  filter:
+    command: gpg
+    args: ["--dearmor"]
+
 "usr/bin/docker-credential-secretservice":
   type: file
   url: "https://github.com/docker/docker-credential-helpers/releases/download/v{{ template "get-github-latest-version" list "docker/docker-credential-helpers" $cache }}/docker-credential-secretservice-v{{ template "get-github-latest-version" list "docker/docker-credential-helpers" $cache }}.linux-{{ .chezmoi.arch }}"
