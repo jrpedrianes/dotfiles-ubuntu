@@ -123,6 +123,8 @@ plugins=(
   asdf
   doctl
   chezmoi
+  kubectl
+  helm
 )
 
 # https://github.com/zsh-users/zsh-completions/issues/603
