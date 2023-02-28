@@ -15,6 +15,7 @@ readonly wanted_packages=(
   libreadline-dev
   libsqlite3-dev
   curl
+  httpie
   libncursesw5-dev
   xz-utils
   tk-dev
@@ -46,5 +47,5 @@ if [[ ${#missing_packages[@]} -gt 0 ]]; then
   log_task "Installing missing packages with APT: ${missing_packages[*]}"
 
   c apt update --yes
-  c apt install --yes --install-recommends "${missing_packages[@]}"
+  c apt install --yes --no-install-recommends "${missing_packages[@]}"
 fi

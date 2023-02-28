@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# {{ template "scripts-library" }}
+
+# The following line is for ShellCheck to correctly identify the above included library
+true || source ../.chezmoitemplates/scripts-library
+
+discord_latest=$(curl -fsSL -o /dev/null -w "%{url_effective}" "https://discord.com/api/download?platform=linux&format=deb" | sed -e "s/.*\/discord-\(.*\).deb/\1/")
+
+discord_current=$(dpkg-query -W --showformat='${Version}' discord 2> /dev/null || echo "NOT_FOUND")
+
+if [[ "${discord_latest}" = "NOT_FOUND" ]] || [[ "${discord_latest}" != "${discord_current}" ]]; then
+  log_task "Installing discord - ${discord_latest}"
+
+  wget "https://dl.discordapp.net/apps/linux/${discord_latest}/discord-${discord_latest}.deb" --directory-prefix=/tmp/
+
+  c apt install --yes --no-install-recommends "/tmp/discord-${discord_latest}.deb"
+
+  rm -rf "/tmp/discord-${discord_latest}.deb"
+fi

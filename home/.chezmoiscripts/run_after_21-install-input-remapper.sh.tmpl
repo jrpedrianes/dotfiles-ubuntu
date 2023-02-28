@@ -5,16 +5,15 @@
 # The following line is for ShellCheck to correctly identify the above included library
 true || source ../.chezmoitemplates/scripts-library
 
-version="1.5.0"
+asdf_version_latest=$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/sezanzeb/input-remapper/releases/latest | sed -e "s/.*\///")
 
-is_pkg_installed=$(dpkg-query -W --showformat='${Status}:${Version}\n' input-remapper)
-current_version=$(echo "${is_pkg_installed}" | cut -d":" -f2)
+asdf_version_current=$(dpkg-query -W --showformat='${Version}' input-remapper 2> /dev/null || echo "NOT_FOUND")
 
-if [[ "${is_pkg_installed}" != "install ok installed"* ]] || [[ "${current_version}" != "${version}" ]]; then
-  wget "https://github.com/sezanzeb/input-remapper/releases/download/${version}/input-remapper-${version}_all.deb" --directory-prefix=/tmp/
+if [[ "${asdf_version_current}" = "NOT_FOUND" ]] || [[ "${asdf_version_latest}" != "${asdf_version_current}" ]]; then
+  wget "https://github.com/sezanzeb/input-remapper/releases/download/${asdf_version_current}/input-remapper-${asdf_version_current}_all.deb" --directory-prefix=/tmp/
 
-  log_task "Installing input-remapper - ${version}"
-  c sudo apt install --yes --install-recommends "/tmp/input-remapper-${version}.deb"
+  log_task "Installing input-remapper - ${asdf_version_current}"
+  c sudo apt install --yes --no-install-recommends "/tmp/input-remapper-${asdf_version_current}.deb"
 
-  rm -rf "/tmp/input-remapper-${version}_all.deb"
+  rm -rf "/tmp/input-remapper-${asdf_version_current}_all.deb"
 fi
