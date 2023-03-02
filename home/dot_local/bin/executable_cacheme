@@ -1,0 +1,20 @@
+#!/bin/bash
+# save as e.g. $HOME/.local/bin/cacheme
+# and then chmod u+x $HOME/.local/bin/cacheme
+VERBOSE=false
+EXPIRY=86400 # default to 1 day
+
+# check if first argument is a number, if so use it as expiration (seconds)
+[ "$1" -eq "$1" ] 2>/dev/null && EXPIRY=$1 && shift
+[ "$VERBOSE" = true ] && echo "Using expiration $EXPIRY seconds"
+
+PROG="$(basename $1)"
+DIR="/tmp/.cache/${USER}/${PROG}"
+mkdir -p "${DIR}"
+chmod 700 "${DIR}"
+
+CMD="$@"
+HASH=$(echo "$CMD" | md5sum | awk '{print $1}')
+CACHE="$DIR/$HASH"
+test -f "${CACHE}" && [ $(expr $(date +%s) - $(date -r "$CACHE" +%s)) -le $EXPIRY ] || eval "$CMD" > "${CACHE}"
+cat "${CACHE}"
