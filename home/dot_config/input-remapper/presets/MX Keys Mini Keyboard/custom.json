@@ -1,12 +1,12 @@
 {
-  "mapping": {
-    "1,115,1": [
-      "KEY_INSERT",
-      "keyboard"
-    ],
-    "1,110,1": [
-      "XF86AudioRaiseVolume",
-      "keyboard"
-    ]
-  }
+    "mapping": {
+        "1,115,1": [
+            "KEY_INSERT",
+            "keyboard"
+        ],
+        "1,110,1": [
+            "XF86AudioRaiseVolume",
+            "keyboard"
+        ]
+    }
 }

@@ -10,6 +10,13 @@
     command: gpg
     args: ["--dearmor"]
 
+"usr/share/keyrings/vscode-archive-keyring.gpg":
+  type: file
+  url: "https://packages.microsoft.com/keys/microsoft.asc"
+  filter:
+    command: gpg
+    args: ["--dearmor"]
+
 "usr/share/keyrings/google-chrome-archive-keyring.gpg":
   type: file
   url: "https://dl.google.com/linux/linux_signing_key.pub"
