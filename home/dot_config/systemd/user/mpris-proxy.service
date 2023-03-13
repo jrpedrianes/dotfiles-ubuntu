@@ -1,0 +1,11 @@
+# Based in this tutorial:
+#  https://sterba.dev/posts/linux-and-bluetooth/
+[Unit]
+Description=Forward bluetooth media controls to MPRIS
+
+[Service]
+Type=simple
+ExecStart=/usr/lib/bluetooth/mpris-proxy
+
+[Install]
+WantedBy=default.target

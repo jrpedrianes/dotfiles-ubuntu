@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# {{ template "scripts-library" }}
+
+# hash: {{ include "dot_config/systemd/user/mpris-proxy.service" | sha256sum }}
+
+log_task "Enable mpris to getting the touch gestures to work"
+
+systemctl --user enable --now mpris-proxy
