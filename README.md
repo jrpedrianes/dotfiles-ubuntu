@@ -3,7 +3,7 @@ Jorge Rodríguez Pedrianes' dotfiles
 
 Personal dotfiles to configure Ubuntu on a Slimbook laptop.
 
-This project is based on the great project of @felipecrs, kudos for that great job 👏.
+This project is based on the great project of [@felipecrs](https://github.com/felipecrs), kudos for that great job 👏.
 
 https://github.com/felipecrs/dotfiles/tree/master
 
