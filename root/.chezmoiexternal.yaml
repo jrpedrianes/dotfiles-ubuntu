@@ -45,6 +45,13 @@
     command: gpg
     args: ["--dearmor"]
 
+"usr/share/keyrings/pipewire-extra-bt-codecs.gpg":
+  type: file
+  url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x018608be284ad8ee9e90e44ce265bd42d7e7e88c"
+  filter:
+    command: gpg
+    args: ["--dearmor"]
+
 "usr/bin/docker-credential-secretservice":
   type: file
   url: "https://github.com/docker/docker-credential-helpers/releases/download/v{{ template "get-github-latest-version" list "docker/docker-credential-helpers" $cache }}/docker-credential-secretservice-v{{ template "get-github-latest-version" list "docker/docker-credential-helpers" $cache }}.linux-{{ .chezmoi.arch }}"

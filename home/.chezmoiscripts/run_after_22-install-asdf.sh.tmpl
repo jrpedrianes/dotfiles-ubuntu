@@ -18,6 +18,6 @@ asdf_current=$(git -C "${asdf_dir}" describe --tags)
 if [[ "${asdf_latest}" != "${asdf_current}" ]]; then
   log_task "Upgrading asdf to ${asdf_latest}"
 
-  git -C "${asdf_dir}" pull origin master -p
+  git -C "${asdf_dir}" pull origin master -p --tags
   git -C "${asdf_dir}" checkout "${asdf_latest}"
 fi
