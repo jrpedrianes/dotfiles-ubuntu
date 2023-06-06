@@ -59,6 +59,13 @@
     command: gpg
     args: ["--dearmor"]
 
+"usr/share/keyrings/httpie.gpg":
+  type: file
+  url: "https://packages.httpie.io/deb/KEY.gpg"
+  filter:
+    command: gpg
+    args: ["--dearmor"]
+
 "usr/bin/docker-credential-secretservice":
   type: file
   url: "https://github.com/docker/docker-credential-helpers/releases/download/v{{ template "get-github-latest-version" list "docker/docker-credential-helpers" $cache }}/docker-credential-secretservice-v{{ template "get-github-latest-version" list "docker/docker-credential-helpers" $cache }}.linux-{{ .chezmoi.arch }}"
