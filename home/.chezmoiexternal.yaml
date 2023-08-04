@@ -47,11 +47,6 @@
   url: "https://github.com/danielfoehrKn/kubeswitch/releases/download/{{ template "get-github-latest-version" list "danielfoehrKn/kubeswitch" $cache }}/switcher_linux_{{ .chezmoi.arch }}"
   executable: true
 
-".config/kubeswitch/switch.sh":
-  type: file
-  url: "https://github.com/danielfoehrKn/kubeswitch/releases/download/{{ template "get-github-latest-version" list "danielfoehrKn/kubeswitch" $cache }}/switch.sh"
-  executable: true
-
 ".local/bin/kubecolor":
   type: file
   url: "https://github.com/hidetatz/kubecolor/releases/download/v{{ template "get-github-latest-version" list "hidetatz/kubecolor" $cache }}/kubecolor_{{ template "get-github-latest-version" list "hidetatz/kubecolor" $cache }}_Linux_{{ .uname_arch }}.tar.gz"
