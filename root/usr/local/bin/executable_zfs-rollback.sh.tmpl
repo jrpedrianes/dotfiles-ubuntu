@@ -1,0 +1,88 @@
+#!/bin/sh
+# zfs_recursive_rollback
+#
+# ©2021 Boruch Baum <boruch_baum@gmx.com>
+# License: GPL3+
+#
+# usage: zfs_recursive_rollback dataset@snapshot
+#
+#                               dataset @snapshot
+#
+#                               dataset snapshot
+
+CMD="zfs rollback -r -R -f "
+CMD_OPTS="
+  -r : also destroy newer snapshots and bookmarks
+  -f : forcibly unmount their clones
+  -R : also destroy those clones"
+
+rollback_recursively() {
+  # The zfs spec forbids spaces, etc. in dataset and snapshot names
+  for EACHSNAP in $(zfs list -H -t snapshot -r ${DATASET} | grep ${SNAP} | cut -f 1); do
+    if [ $# -ne 0 ] ; then
+      # Dry-run: Don't actually do anything
+      printf "roll back to ${EACHSNAP}\n"
+    else
+      # The real operation
+      printf "rolling back to ${EACHSNAP} : "
+      eval ${CMD} ${EACHSNAP}
+      printf "  done.\n"
+    fi
+  done
+}
+
+exit_unless_confirms_with_yes() {
+  read -p "enter 'yes' to continue: " REPLY
+  if [ "${REPLY}" != "yes" ] ; then
+    printf "aborting..\n"
+    exit
+  fi
+}
+
+# main() BEGIN
+
+# main() validate input
+if [ $# -eq 2 ]; then
+  DATASET="$1"
+  SNAP="$2"
+  [ -z "${SNAP%%@*}" ] || SNAP="@${SNAP}"
+elif [ $# -eq 1 ]; then
+  DATASET="${1%%@*}"
+  SNAP="${1##*@}"
+  if [ "$1" = "${DATASET}" -o "$1" = "${SNAP}" ] ; then
+    printf "could not parse pool@snapshot: $1\n"
+    exit
+  SNAP="@${SNAP}"
+  fi
+else
+  printf "usage: $0 dataset@snapshot\nexample: $0 rpool/ROOT/usr@2022-01-01_001\n"
+  exit
+fi
+COUNT=$(zfs list -H -t snapshot -r "${DATASET}" | grep -c "${SNAP}")
+if [ ${COUNT} -eq 0 ] ; then
+  printf "snapshot not found for dataset.\nsnapshot: ${SNAP}\ndataset:  ${DATASET}\n"
+  exit
+fi
+
+# main() verify operation
+clear
+printf "zfs_recursive_rollback\n
+WARNING: This should be thought of as an *extreme* action,
+         a catastrophic last resort!\n
+ADVICE: Most user cases can be resolved by temporarily
+        mounting snapshot(s) and restoring specific data.\n
+Continuing will catastrophically perform a recursive zfs rollback,
+destroying snapshots, bookmarks, and clones!\n
+Are you certain that you really want to rollback ALL datasets
+under        $DATASET
+to snapshot: $SNAP ?\n
+Doing this will perform: ${CMD_OPTS}\n\n"
+exit_unless_confirms_with_yes
+clear
+printf "\nOK. Here's what's about to happen:\n"
+rollback_recursively "dry-run"
+printf "Are you certain that you're OK with all of that?\n\n"
+exit_unless_confirms_with_yes
+
+# main() perform operation
+rollback_recursively
