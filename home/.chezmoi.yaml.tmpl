@@ -63,6 +63,8 @@ sourceDir: "{{ .chezmoi.workingTree }}"
 
 verbose: true
 
+umask: 0o00:Q12
+
 {{ if stdinIsATTY -}}
 progress: auto
 {{- end }}
