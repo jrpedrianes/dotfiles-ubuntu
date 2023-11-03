@@ -163,4 +163,3 @@ if command -v bw &> /dev/null; then
   export BITWARDENCLI_APPDATA_DIR="$HOME/.config/Bitwarden_CLI"
   eval "$(bw completion --shell zsh); compdef _bw bw;"
 fi
-
