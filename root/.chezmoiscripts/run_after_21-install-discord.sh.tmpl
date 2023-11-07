@@ -14,6 +14,8 @@ if [[ "${discord_latest}" = "NOT_FOUND" ]] || [[ "${discord_latest}" != "${disco
 
   wget "https://dl.discordapp.net/apps/linux/${discord_latest}/discord-${discord_latest}.deb" --directory-prefix=/tmp/
 
+  chmod a+r "/tmp/discord-${discord_latest}.deb"
+
   c apt install --yes --no-install-recommends "/tmp/discord-${discord_latest}.deb"
 
   rm -rf "/tmp/discord-${discord_latest}.deb"
