@@ -10,9 +10,12 @@ asdf_version_latest=$(curl -fsSL -o /dev/null -w "%{url_effective}" https://gith
 asdf_version_current=$(dpkg-query -W --showformat='${Version}' input-remapper 2> /dev/null || echo "NOT_FOUND")
 
 if [[ "${asdf_version_current}" = "NOT_FOUND" ]] || [[ "${asdf_version_latest}" != "${asdf_version_current}" ]]; then
+  log_task "Installing input-remapper - ${asdf_version_latest}"
+
   wget "https://github.com/sezanzeb/input-remapper/releases/download/${asdf_version_latest}/input-remapper-${asdf_version_latest}.deb" --directory-prefix=/tmp/
 
-  log_task "Installing input-remapper - ${asdf_version_latest}"
+  chmod a+r "/tmp/input-remapper-${asdf_version_latest}.deb"
+
   c sudo apt install --yes --no-install-recommends "/tmp/input-remapper-${asdf_version_latest}.deb"
 
   rm -rf "/tmp/input-remapper-${asdf_version_latest}.deb"
