@@ -126,6 +126,7 @@ plugins=(
   chezmoi
   kubectl
   helm
+  bitwarden
 )
 
 # https://github.com/zsh-users/zsh-completions/issues/603
@@ -157,9 +158,3 @@ compdef _switcher switch
 
 # Append this line to ~/.zshrc to enable fuzzy auto-completion for Zsh:
 [[ ! -f /usr/share/doc/fzf/examples/completion.zsh ]] || source /usr/share/doc/fzf/examples/completion.zsh
-
-# Bitwarden shell completion
-if command -v bw &> /dev/null; then
-  export BITWARDENCLI_APPDATA_DIR="$HOME/.config/Bitwarden_CLI"
-  eval "$(bw completion --shell zsh); compdef _bw bw;"
-fi
