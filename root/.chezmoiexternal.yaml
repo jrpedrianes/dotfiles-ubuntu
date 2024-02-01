@@ -40,7 +40,7 @@
 
 "usr/share/keyrings/spotify.gpg":
   type: file
-  url: "https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg"
+  url: "https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg"
   filter:
     command: gpg
     args: ["--dearmor"]
