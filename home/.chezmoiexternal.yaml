@@ -49,7 +49,7 @@
 
 ".local/bin/kubecolor":
   type: file
-  url: "https://github.com/hidetatz/kubecolor/releases/download/v{{ template "get-github-latest-version" list "hidetatz/kubecolor" $cache }}/kubecolor_{{ template "get-github-latest-version" list "hidetatz/kubecolor" $cache }}_Linux_{{ .uname_arch }}.tar.gz"
+  url: "https://github.com/kubecolor/kubecolor/releases/download/v{{ template "get-github-latest-version" list "kubecolor/kubecolor" $cache }}/kubecolor_{{ template "get-github-latest-version" list "kubecolor/kubecolor" $cache }}_linux_{{ .chezmoi.arch }}.tar.gz"
   filter:
     command: tar
     args: ["-x", "-z", "-O", "kubecolor"]
