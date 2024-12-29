@@ -158,3 +158,8 @@ compdef _switcher switch
 
 # Append this line to ~/.zshrc to enable fuzzy auto-completion for Zsh:
 [[ ! -f /usr/share/doc/fzf/examples/completion.zsh ]] || source /usr/share/doc/fzf/examples/completion.zsh
+
+# Load Angular CLI autocompletion.
+if (( ${+commands[ng]} )); then
+  source <(ng completion script)
+fi
