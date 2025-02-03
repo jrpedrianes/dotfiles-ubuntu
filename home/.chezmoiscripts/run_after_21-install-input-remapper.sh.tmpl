@@ -5,18 +5,18 @@
 # The following line is for ShellCheck to correctly identify the above included library
 true || source ../.chezmoitemplates/scripts-library
 
-asdf_version_latest=$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/sezanzeb/input-remapper/releases/latest | sed -e "s/.*\///")
+remapper_version_latest=$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/sezanzeb/input-remapper/releases/latest | sed -e "s/.*\///")
 
-asdf_version_current=$(dpkg-query -W --showformat='${Version}' input-remapper 2> /dev/null || echo "NOT_FOUND")
+remapper_version_current=$(dpkg-query -W --showformat='${Version}' input-remapper 2> /dev/null || echo "NOT_FOUND")
 
-if [[ "${asdf_version_current}" = "NOT_FOUND" ]] || [[ "${asdf_version_latest}" != "${asdf_version_current}" ]]; then
-  log_task "Installing input-remapper - ${asdf_version_latest}"
+if [[ "${remapper_version_current}" = "NOT_FOUND" ]] || [[ "${remapper_version_latest}" != "${remapper_version_current}" ]]; then
+  log_task "Installing input-remapper - ${remapper_version_latest}"
 
-  wget "https://github.com/sezanzeb/input-remapper/releases/download/${asdf_version_latest}/input-remapper-${asdf_version_latest}.deb" --directory-prefix=/tmp/
+  wget "https://github.com/sezanzeb/input-remapper/releases/download/${remapper_version_latest}/input-remapper-${remapper_version_latest}.deb" --directory-prefix=/tmp/
 
-  chmod a+r "/tmp/input-remapper-${asdf_version_latest}.deb"
+  chmod a+r "/tmp/input-remapper-${remapper_version_latest}.deb"
 
-  c sudo apt install --yes --no-install-recommends "/tmp/input-remapper-${asdf_version_latest}.deb"
+  c sudo apt install --yes --no-install-recommends "/tmp/input-remapper-${remapper_version_latest}.deb"
 
-  rm -rf "/tmp/input-remapper-${asdf_version_latest}.deb"
+  rm -rf "/tmp/input-remapper-${remapper_version_latest}.deb"
 fi
