@@ -6,7 +6,7 @@
 true || source ../.chezmoitemplates/scripts-library
 
 #asdf_latest=$(curl -fsSL -o /dev/null -w "%{url_effective}" https://github.com/asdf-vm/asdf/releases/latest | sed -e "s/.*\///")
-asdf_latest=v0.15.0
+asdf_latest="v0.15.0"
 asdf_dir="${HOME}/.asdf"
 
 if [[ ! -d "${asdf_dir}" ]]; then
