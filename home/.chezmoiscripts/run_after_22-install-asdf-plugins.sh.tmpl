@@ -37,7 +37,7 @@ for plugin in "${wanted_plugins[@]}"; do
   if [[ ! -d "${asdf_dir}/plugins/${plugin}" ]]; then
     log_task "Adding asdf pluing ${plugin}"
 
-    "${asdf_dir}"/bin/asdf plugin add "${plugin}"
+    "${HOME}"/.local/bin/asdf plugin add "${plugin}"
   fi
 done
 
