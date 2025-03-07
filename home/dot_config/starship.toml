@@ -1,0 +1,39 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = '$username$hostname$localip$shlvl$singularity$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$pijul_channel$docker_context$kubernetes$package$bun$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam$golang$gradle$haskell$haxe$helm$java$julia$kotlin$lua$mojo$nim$nodejs$ocaml$odin$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$swift$terraform$typst$vlang$vagrant$zig$buf$guix_shell$nix_shell$conda$meson$spack$memory_usage$aws$gcloud$openstack$azure$direnv$env_var$crystal$custom$sudo$cmd_duration$line_break$jobs$battery$time$status$container$os$shell$character'
+
+[time]
+format = '[$time]($style) '
+disabled = false
+
+[directory]
+truncation_symbol = '…/'
+fish_style_pwd_dir_length = 1
+
+[gcloud]
+disabled = true
+
+[kubernetes]
+disabled = false
+symbol = '☸️ '
+format = '[$symbol$context( \($namespace\))]($style) '
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+style = 'green'
+truncation_length=30
+
+[git_status]
+format = '([$all_status$ahead_behind]($style))'
+ahead = '⇡${count} '
+behind = '⇣${count} '
+diverged = '⇕⇡${ahead_count}⇣${behind_count} '
+untracked = '?${count} '
+stashed = '$${count} '
+modified = '!${count} '
+staged = '+${count} '
+renamed = '»${count} '
+deleted = '✘${count} '
+style = 'yellow'
+

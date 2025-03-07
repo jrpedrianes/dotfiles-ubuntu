@@ -10,12 +10,6 @@
   # waiting for https://github.com/twpayne/chezmoi/issues/1614#issuecomment-966524408
   # exact: true
 
-".oh-my-zsh/custom/themes/powerlevel10k":
-  type: archive
-  url: "https://github.com/romkatv/powerlevel10k/archive/{{ template "get-github-head-revision" list "romkatv/powerlevel10k" $cache }}.tar.gz"
-  stripComponents: 1
-  exact: true
-
 ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting":
   type: archive
   url: "https://github.com/zsh-users/zsh-syntax-highlighting/archive/{{ template "get-github-head-revision" list "zsh-users/zsh-syntax-highlighting" $cache }}.tar.gz"
@@ -61,6 +55,14 @@
   filter:
     command: tar
     args: ["-x", "-z", "-O", "asdf"]
+  executable: true
+
+".local/bin/starship":
+  type: file
+  url: "https://github.com/starship/starship/releases/download/v{{ template "get-github-latest-version" list "starship/starship" $cache }}/starship-{{ .uname_arch }}-unknown-linux-gnu.tar.gz"
+  filter:
+    command: tar
+    args: ["-x", "-z", "-O", "starship"]
   executable: true
 
 "{{ joinPath .fontsDir .terminalFont.fileName }}":
