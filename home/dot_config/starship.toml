@@ -1,23 +1,204 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = '$username$hostname$localip$shlvl$singularity$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$pijul_channel$docker_context$kubernetes$package$bun$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam$golang$gradle$haskell$haxe$helm$java$julia$kotlin$lua$mojo$nim$nodejs$ocaml$odin$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$swift$terraform$typst$vlang$vagrant$zig$buf$guix_shell$nix_shell$conda$meson$spack$memory_usage$aws$gcloud$openstack$azure$direnv$env_var$crystal$custom$sudo$cmd_duration$line_break$jobs$battery$time$status$container$os$shell$character'
+add_newline = true
+continuation_prompt = "[▸▹ ](dimmed white)"
 
-[time]
-format = '[$time]($style) '
-disabled = false
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$nats\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$kubernetes\
+$package\
+$bun\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$gradle\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$mojo\
+$nim\
+$nodejs\
+$ocaml\
+$odin\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$guix_shell\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$direnv\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$container\
+$os\
+$shell\
+$character"""
+
+#format = """
+#$nix_shell\
+#$container\
+#$hostname\
+#$localip\
+#$shlvl\
+#$shell\
+#$env_var\
+#$jobs\
+#$sudo\
+#$username\
+#$directory\
+#$git_branch\
+#$git_commit\
+#$git_state\
+#$git_status\
+#$git_metrics\
+#$character"""
+#
+#right_format = """
+#$cmd_duration\
+#$singularity\
+#$kubernetes\
+#$vcsh\
+#$fossil_branch\
+#$hg_branch\
+#$pijul_channel\
+#$docker_context\
+#$package\
+#$c\
+#$cmake\
+#$cobol\
+#$daml\
+#$dart\
+#$deno\
+#$direnv\
+#$dotnet\
+#$elixir\
+#$elm\
+#$erlang\
+#$fennel\
+#$golang\
+#$guix_shell\
+#$haskell\
+#$haxe\
+#$helm\
+#$java\
+#$julia\
+#$kotlin\
+#$gradle\
+#$lua\
+#$nim\
+#$nodejs\
+#$ocaml\
+#$opa\
+#$perl\
+#$php\
+#$pulumi\
+#$purescript\
+#$python\
+#$raku\
+#$rlang\
+#$red\
+#$ruby\
+#$rust\
+#$scala\
+#$solidity\
+#$swift\
+#$terraform\
+#$vlang\
+#$vagrant\
+#$zig\
+#$buf\
+#$conda\
+#$meson\
+#$spack\
+#$memory_usage\
+#$aws\
+#$gcloud\
+#$openstack\
+#$azure\
+#$crystal\
+#$custom\
+#$status\
+#$os\
+#$battery\
+#$time"""
 
 [directory]
 truncation_symbol = '…/'
 fish_style_pwd_dir_length = 1
 
-[gcloud]
+[direnv]
 disabled = true
 
-[kubernetes]
-disabled = false
-symbol = '☸️ '
-format = '[$symbol$context( \($namespace\))]($style) '
+[fill]
+symbol = ' '
+
+[gcloud]
+disabled = true
 
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
@@ -37,3 +218,28 @@ renamed = '»${count} '
 deleted = '✘${count} '
 style = 'yellow'
 
+[golang]
+format = '[$symbol($version )($mod_version )]($style)'
+
+[java]
+format = '[${symbol}(${version} )]($style)'
+
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \[$namespace\])]($style) '
+
+[nix_shell]
+disabled = true
+
+[nodejs]
+format = '[$symbol($version )]($style)'
+
+[package]
+format = '[$symbol$version]($style) '
+
+[python]
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+
+[time]
+format = '[$time]($style) '
+disabled = false
