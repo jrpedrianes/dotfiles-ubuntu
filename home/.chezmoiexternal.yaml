@@ -3,75 +3,77 @@
 
 {{- template "read-versions-and-revisions-cache" $cache -}}
 
+{{ $omzRevision := includeTemplate "get-github-head-revision" (list "ohmyzsh/ohmyzsh" $cache) }}
 ".oh-my-zsh":
   type: archive
-  url: "https://github.com/ohmyzsh/ohmyzsh/archive/{{ template "get-github-head-revision" list "ohmyzsh/ohmyzsh" $cache }}.tar.gz"
+  url: "https://github.com/ohmyzsh/ohmyzsh/archive/{{ $omzRevision }}.tar.gz"
   stripComponents: 1
   # waiting for https://github.com/twpayne/chezmoi/issues/1614#issuecomment-966524408
   # exact: true
 
+{{ $zshSyntaxHighlightingRevision := includeTemplate "get-github-head-revision" (list "zsh-users/zsh-syntax-highlighting" $cache) }}
 ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting":
   type: archive
-  url: "https://github.com/zsh-users/zsh-syntax-highlighting/archive/{{ template "get-github-head-revision" list "zsh-users/zsh-syntax-highlighting" $cache }}.tar.gz"
+  url: "https://github.com/zsh-users/zsh-syntax-highlighting/archive/{{ $zshSyntaxHighlightingRevision }}.tar.gz"
   stripComponents: 1
   exact: true
 
+{{ $zshAutosuggestionsRevision := includeTemplate "get-github-head-revision" (list "zsh-users/zsh-autosuggestions" $cache) }}
 ".oh-my-zsh/custom/plugins/zsh-autosuggestions":
   type: archive
-  url: "https://github.com/zsh-users/zsh-autosuggestions/archive/{{ template "get-github-head-revision" list "zsh-users/zsh-autosuggestions" $cache }}.tar.gz"
+  url: "https://github.com/zsh-users/zsh-autosuggestions/archive/{{ $zshAutosuggestionsRevision }}.tar.gz"
   stripComponents: 1
   exact: true
 
+{{ $zshCompletionsRevision := includeTemplate "get-github-head-revision" (list "zsh-users/zsh-completions" $cache) }}
 ".oh-my-zsh/custom/plugins/zsh-completions":
   type: archive
-  url: "https://github.com/zsh-users/zsh-completions/archive/{{ template "get-github-head-revision" list "zsh-users/zsh-completions" $cache }}.tar.gz"
+  url: "https://github.com/zsh-users/zsh-completions/archive/{{ $zshCompletionsRevision }}.tar.gz"
   stripComponents: 1
   exact: true
 
-".local/bin/doctl":
-  type: file
-  url: "https://github.com/digitalocean/doctl/releases/download/v{{ template "get-github-latest-version" list "digitalocean/doctl" $cache }}/doctl-{{ template "get-github-latest-version" list "digitalocean/doctl" $cache }}-linux-{{ .chezmoi.arch }}.tar.gz"
-  filter:
-    command: tar
-    args: ["-x", "-z", "-O", "doctl"]
-  executable: true
-
+{{ $direnvVersion := includeTemplate "get-github-latest-version" (list "direnv/direnv" $cache) }}
 ".local/bin/direnv":
   type: file
-  url: "https://github.com/direnv/direnv/releases/download/v{{ template "get-github-latest-version" list "direnv/direnv" $cache }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+  url: "https://github.com/direnv/direnv/releases/download/v{{ $direnvVersion }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
   executable: true
 
+{{ $kubeswitchVersion := includeTemplate "get-github-latest-version" (list "danielfoehrKn/kubeswitch" $cache) }}
 ".local/bin/switcher":
   type: file
-  url: "https://github.com/danielfoehrKn/kubeswitch/releases/download/{{ template "get-github-latest-version" list "danielfoehrKn/kubeswitch" $cache }}/switcher_linux_{{ .chezmoi.arch }}"
+  url: "https://github.com/danielfoehrKn/kubeswitch/releases/download/{{ $kubeswitchVersion }}/switcher_linux_{{ .chezmoi.arch }}"
   executable: true
 
+{{ $kubecolorVersion := includeTemplate "get-github-latest-version" (list "kubecolor/kubecolor" $cache) }}
 ".local/bin/kubecolor":
   type: file
-  url: "https://github.com/kubecolor/kubecolor/releases/download/v{{ template "get-github-latest-version" list "kubecolor/kubecolor" $cache }}/kubecolor_{{ template "get-github-latest-version" list "kubecolor/kubecolor" $cache }}_linux_{{ .chezmoi.arch }}.tar.gz"
+  url: "https://github.com/kubecolor/kubecolor/releases/download/v{{ $kubecolorVersion }}/kubecolor_{{ $kubecolorVersion }}_linux_{{ .chezmoi.arch }}.tar.gz"
   filter:
     command: tar
     args: ["-x", "-z", "-O", "kubecolor"]
   executable: true
 
+{{ $asdfVersion := includeTemplate "get-github-latest-version" (list "asdf-vm/asdf" $cache) }}
 ".local/bin/asdf":
   type: file
-  url: "https://github.com/asdf-vm/asdf/releases/download/v{{ template "get-github-latest-version" list "asdf-vm/asdf" $cache }}/asdf-v{{ template "get-github-latest-version" list "asdf-vm/asdf" $cache }}-linux-{{ .chezmoi.arch }}.tar.gz"
+  url: "https://github.com/asdf-vm/asdf/releases/download/v{{ $asdfVersion }}/asdf-v{{ $asdfVersion }}-linux-{{ .chezmoi.arch }}.tar.gz"
   filter:
     command: tar
     args: ["-x", "-z", "-O", "asdf"]
   executable: true
 
+{{ $starshipVersion := includeTemplate "get-github-latest-version" (list "starship/starship" $cache) }}
 ".local/bin/starship":
   type: file
-  url: "https://github.com/starship/starship/releases/download/v{{ template "get-github-latest-version" list "starship/starship" $cache }}/starship-{{ .uname_arch }}-unknown-linux-gnu.tar.gz"
+  url: "https://github.com/starship/starship/releases/download/v{{ $starshipVersion }}/starship-{{ .uname_arch }}-unknown-linux-gnu.tar.gz"
   filter:
     command: tar
     args: ["-x", "-z", "-O", "starship"]
   executable: true
 
+{{ $nerdFontsVersion := includeTemplate "get-github-latest-version" (list "ryanoasis/nerd-fonts" $cache) }}
 "{{ joinPath .fontsDir .terminalFont.fileName }}":
   type: file
-  url: "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/{{ template "get-github-head-revision" list "ryanoasis/nerd-fonts" $cache }}/patched-fonts/FiraCode/Regular/FiraCodeNerdFontMono-Regular.ttf"
+  url: "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v{{ $nerdFontsVersion }}/patched-fonts/FiraCode/Regular/FiraCodeNerdFontMono-Regular.ttf"
 
 {{- template "save-versions-and-revisions-cache" $cache -}}
