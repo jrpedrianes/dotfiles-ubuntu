@@ -86,6 +86,7 @@ plugins=(
   asdf
   git
   web-search
+  direnv
   docker
   docker-compose
   kubectl

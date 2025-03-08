@@ -36,6 +36,11 @@
     args: ["-x", "-z", "-O", "doctl"]
   executable: true
 
+".local/bin/direnv":
+  type: file
+  url: "https://github.com/direnv/direnv/releases/download/v{{ template "get-github-latest-version" list "direnv/direnv" $cache }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+  executable: true
+
 ".local/bin/switcher":
   type: file
   url: "https://github.com/danielfoehrKn/kubeswitch/releases/download/{{ template "get-github-latest-version" list "danielfoehrKn/kubeswitch" $cache }}/switcher_linux_{{ .chezmoi.arch }}"
