@@ -5,60 +5,65 @@ add_newline = true
 continuation_prompt = "[▸▹ ](dimmed white)"
 
 format = """
-$username\
+$nix_shell\
+$container\
 $hostname\
 $localip\
 $shlvl\
-$singularity\
-$nats\
+$shell\
+$env_var\
+$jobs\
+$sudo\
+$username\
 $directory\
-$vcsh\
-$fossil_branch\
-$fossil_metrics\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
+$git_metrics\
+$character"""
+
+right_format = """
+$cmd_duration\
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
 $hg_branch\
 $pijul_channel\
 $docker_context\
-$kubernetes\
 $package\
-$bun\
 $c\
 $cmake\
 $cobol\
 $daml\
 $dart\
 $deno\
+$direnv\
 $dotnet\
 $elixir\
 $elm\
 $erlang\
 $fennel\
-$gleam\
 $golang\
-$gradle\
+$guix_shell\
 $haskell\
 $haxe\
 $helm\
 $java\
 $julia\
 $kotlin\
+$gradle\
 $lua\
-$mojo\
 $nim\
 $nodejs\
 $ocaml\
-$odin\
 $opa\
 $perl\
 $php\
 $pulumi\
 $purescript\
 $python\
-$quarto\
 $raku\
 $rlang\
 $red\
@@ -68,13 +73,10 @@ $scala\
 $solidity\
 $swift\
 $terraform\
-$typst\
 $vlang\
 $vagrant\
 $zig\
 $buf\
-$guix_shell\
-$nix_shell\
 $conda\
 $meson\
 $spack\
@@ -83,109 +85,33 @@ $aws\
 $gcloud\
 $openstack\
 $azure\
-$direnv\
-$env_var\
 $crystal\
 $custom\
-$sudo\
-$cmd_duration\
-$line_break\
-$jobs\
-$battery\
-$time\
 $status\
-$container\
 $os\
-$shell\
-$character"""
+$battery\
+$time"""
 
-#format = """
-#$nix_shell\
-#$container\
-#$hostname\
-#$localip\
-#$shlvl\
-#$shell\
-#$env_var\
-#$jobs\
-#$sudo\
-#$username\
-#$directory\
-#$git_branch\
-#$git_commit\
-#$git_state\
-#$git_status\
-#$git_metrics\
-#$character"""
-#
-#right_format = """
-#$cmd_duration\
-#$singularity\
-#$kubernetes\
-#$vcsh\
-#$fossil_branch\
-#$hg_branch\
-#$pijul_channel\
-#$docker_context\
-#$package\
-#$c\
-#$cmake\
-#$cobol\
-#$daml\
-#$dart\
-#$deno\
-#$direnv\
-#$dotnet\
-#$elixir\
-#$elm\
-#$erlang\
-#$fennel\
-#$golang\
-#$guix_shell\
-#$haskell\
-#$haxe\
-#$helm\
-#$java\
-#$julia\
-#$kotlin\
-#$gradle\
-#$lua\
-#$nim\
-#$nodejs\
-#$ocaml\
-#$opa\
-#$perl\
-#$php\
-#$pulumi\
-#$purescript\
-#$python\
-#$raku\
-#$rlang\
-#$red\
-#$ruby\
-#$rust\
-#$scala\
-#$solidity\
-#$swift\
-#$terraform\
-#$vlang\
-#$vagrant\
-#$zig\
-#$buf\
-#$conda\
-#$meson\
-#$spack\
-#$memory_usage\
-#$aws\
-#$gcloud\
-#$openstack\
-#$azure\
-#$crystal\
-#$custom\
-#$status\
-#$os\
-#$battery\
-#$time"""
+[buf]
+disabled = true
+
+[bun]
+disabled = true
+
+[cobol]
+disabled = true
+
+[crystal]
+disabled = true
+
+[daml]
+disabled = true
+
+[dart]
+disabled = true
+
+[deno]
+disabled = true
 
 [directory]
 truncation_symbol = '…/'
@@ -194,8 +120,26 @@ fish_style_pwd_dir_length = 1
 [direnv]
 disabled = true
 
+[elixir]
+disabled = true
+
+[elm]
+disabled = true
+
+[erlang]
+disabled = true
+
+[fennel]
+disabled = true
+
 [fill]
 symbol = ' '
+
+[fossil_branch]
+disabled = true
+
+[fossil_metrics]
+disabled = true
 
 [gcloud]
 disabled = true
@@ -203,7 +147,7 @@ disabled = true
 [git_branch]
 format = '[$symbol$branch(:$remote_branch)]($style) '
 style = 'green'
-truncation_length=30
+truncation_length=20
 
 [git_status]
 format = '([$all_status$ahead_behind]($style))'
@@ -218,15 +162,47 @@ renamed = '»${count} '
 deleted = '✘${count} '
 style = 'yellow'
 
+[gleam]
+disabled = true
+
 [golang]
 format = '[$symbol($version )($mod_version )]($style)'
 
+[haskell]
+disabled = true
+
+[haxe]
+disabled = true
+
 [java]
+symbol = '🍵 '
 format = '[${symbol}(${version} )]($style)'
+
+[julia]
+disabled = true
 
 [kubernetes]
 disabled = false
 format = '[$symbol$context( \[$namespace\])]($style) '
+
+[lua]
+disabled = true
+
+[meson]
+disabled = true
+
+# mercurial branch
+[hg_branch]
+disabled = true
+
+[mojo]
+disabled = true
+
+[nats]
+disabled = true
+
+[nim]
+disabled = true
 
 [nix_shell]
 disabled = true
@@ -234,12 +210,78 @@ disabled = true
 [nodejs]
 format = '[$symbol($version )]($style)'
 
+[ocaml]
+disabled = true
+
+[odin]
+disabled = true
+
+[opa]
+disabled = true
+
+[openstack]
+disabled = true
+
 [package]
 format = '[$symbol$version]($style) '
+
+[perl]
+disabled = true
+
+[php]
+disabled = true
+
+[pijul_channel]
+disabled = true
+
+[pulumi]
+disabled = true
+
+[purescript]
+disabled = true
 
 [python]
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 
+[quarto]
+disabled = true
+
+[rlang]
+disabled = true
+
+[raku]
+disabled = true
+
+[red]
+disabled = true
+
+[ruby]
+disabled = true
+
+[scala]
+disabled = true
+
+[singularity]
+disabled = true
+
+[solidity]
+disabled = true
+
+[spack]
+disabled = true
+
 [time]
 format = '[$time]($style) '
 disabled = false
+
+[typst]
+disabled = true
+
+[vlang]
+disabled = true
+
+[vcsh]
+disabled = true
+
+[zig]
+disabled = true
