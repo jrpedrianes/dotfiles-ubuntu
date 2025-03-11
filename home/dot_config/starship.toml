@@ -159,7 +159,6 @@ stashed = '$${count} '
 modified = '!${count} '
 staged = '+${count} '
 renamed = '»${count} '
-deleted = '✘${count} '
 style = 'yellow'
 
 [gleam]
