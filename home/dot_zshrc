@@ -83,31 +83,32 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  1password
   asdf
-  git
-  web-search
+  bitwarden
+  chezmoi
+  command-not-found
+  common-aliases
   direnv
   docker
   docker-compose
-  kubectl
-  helm
-  npm
-  command-not-found
-  common-aliases
-  httpie
-  ubuntu
-  sudo
-  zsh-syntax-highlighting
-  zsh-autosuggestions
-  1password
-  mvn
   doctl
-  chezmoi
-  kubectl
+  git
   helm
-  bitwarden
+  helm
+  httpie
+  kubectl
+  kubectl
+  mvn
+  npm
   starship
+  sudo
   switcher
+  terraform
+  ubuntu
+  web-search
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 # https://github.com/zsh-users/zsh-completions/issues/603
