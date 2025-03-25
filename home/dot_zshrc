@@ -106,6 +106,7 @@ plugins=(
   switcher
   terraform
   ubuntu
+  vault
   web-search
   zsh-autosuggestions
   zsh-syntax-highlighting
