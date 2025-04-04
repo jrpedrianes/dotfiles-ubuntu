@@ -92,7 +92,6 @@ plugins=(
   direnv
   docker
   docker-compose
-  doctl
   git
   helm
   helm
