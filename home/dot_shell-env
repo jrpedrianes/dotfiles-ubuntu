@@ -13,9 +13,3 @@ source "$HOME/.shell/aliases"
 if [[ -f "$HOME/.shell-env-local" ]]; then
   source "$HOME/.shell-env-local"
 fi
-
-# Java: To set JAVA_HOME in your shell's initialization add the following:
-source "$HOME/.asdf/plugins/java/set-java-home.zsh"
-
-# GO: To set GOROOT in your shell's initialization add the following:
-source "$HOME/.asdf/plugins/golang/set-env.zsh"

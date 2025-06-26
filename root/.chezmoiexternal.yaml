@@ -84,10 +84,17 @@
     command: gpg
     args: ["--dearmor"]
 
-{{ $dockerCredentialSecretserviceVersion := includeTemplate "get-github-latest-version" (list "docker/docker-credential-helpers" $cache) }}
+"usr/share/keyrings/mise-archive-keyring.gpg":
+  type: file
+  url: "https://mise.jdx.dev/gpg-key.pub"
+  filter:
+    command: gpg
+    args: ["--dearmor"]
+
+{{ $dockerCredentialSecretServiceVersion := includeTemplate "get-github-latest-version" (list "docker/docker-credential-helpers" $cache) }}
 "usr/bin/docker-credential-secretservice":
   type: file
-  url: "https://github.com/docker/docker-credential-helpers/releases/download/v{{ $dockerCredentialSecretserviceVersion }}/docker-credential-secretservice-v{{ $dockerCredentialSecretserviceVersion }}.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+  url: "https://github.com/docker/docker-credential-helpers/releases/download/v{{ $dockerCredentialSecretServiceVersion }}/docker-credential-secretservice-v{{ $dockerCredentialSecretServiceVersion }}.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
   executable: true
 
 {{ template "save-versions-and-revisions-cache" $cache -}}

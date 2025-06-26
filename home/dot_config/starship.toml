@@ -12,6 +12,7 @@ $localip\
 $shlvl\
 $shell\
 $env_var\
+$mise\
 $jobs\
 $sudo\
 $username\
@@ -193,6 +194,9 @@ disabled = true
 
 # mercurial branch
 [hg_branch]
+disabled = true
+
+[mise]
 disabled = true
 
 [mojo]

@@ -83,20 +83,18 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  mise # Must be loaded first
   1password
-  asdf
   bitwarden
   chezmoi
   command-not-found
   common-aliases
-  direnv
   docker
   docker-compose
   git
   helm
   helm
   httpie
-  kubectl
   kubectl
   mvn
   npm

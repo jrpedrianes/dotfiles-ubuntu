@@ -32,12 +32,6 @@
   stripComponents: 1
   exact: true
 
-{{ $direnvVersion := includeTemplate "get-github-latest-version" (list "direnv/direnv" $cache) }}
-".local/bin/direnv":
-  type: file
-  url: "https://github.com/direnv/direnv/releases/download/v{{ $direnvVersion }}/direnv.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
-  executable: true
-
 {{ $kubeswitchVersion := includeTemplate "get-github-latest-version" (list "danielfoehrKn/kubeswitch" $cache) }}
 ".local/bin/switcher":
   type: file
@@ -51,15 +45,6 @@
   filter:
     command: tar
     args: ["-x", "-z", "-O", "kubecolor"]
-  executable: true
-
-{{ $asdfVersion := includeTemplate "get-github-latest-version" (list "asdf-vm/asdf" $cache) }}
-".local/bin/asdf":
-  type: file
-  url: "https://github.com/asdf-vm/asdf/releases/download/v{{ $asdfVersion }}/asdf-v{{ $asdfVersion }}-linux-{{ .chezmoi.arch }}.tar.gz"
-  filter:
-    command: tar
-    args: ["-x", "-z", "-O", "asdf"]
   executable: true
 
 {{ $starshipVersion := includeTemplate "get-github-latest-version" (list "starship/starship" $cache) }}
