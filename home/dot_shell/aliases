@@ -6,6 +6,8 @@
 
 
 # === Aliases ===
+alias lzg='lazygit'
+alias lzd='lazydocker'
 
 # kubecolor
 alias kubectl="kubecolor"

@@ -70,4 +70,13 @@
     args: ["-x", "-z", "-O", "lazydocker"]
   executable: true
 
+{{ $lazygitVersion := includeTemplate "get-github-latest-version" (list "jesseduffield/lazygit" $cache) }}
+".local/bin/lazygit":
+  type: file
+  url: "https://github.com/jesseduffield/lazygit/releases/download/v{{ $lazygitVersion }}/lazygit_{{ $lazygitVersion }}_linux_{{ .uname_arch }}.tar.gz"
+  filter:
+    command: tar
+    args: ["-x", "-z", "-O", "lazygit"]
+  executable: true
+
 {{- template "save-versions-and-revisions-cache" $cache -}}
