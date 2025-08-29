@@ -5,7 +5,7 @@ pin = true
 MC_DISABLE_PAGER = "true"
 
 [tools]
-bitwarden = "cli-v2025.5.0"
+bitwarden = "2025.8.0"
 cosign = "2.5.2"
 jq = "1.8.0"
 kubectl = "1.32.6"
