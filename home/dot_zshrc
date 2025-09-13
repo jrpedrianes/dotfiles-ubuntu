@@ -98,6 +98,7 @@ plugins=(
   kubectl
   mvn
   npm
+  pnpm
   starship
   sudo
   switcher
