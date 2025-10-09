@@ -93,7 +93,6 @@ plugins=(
   docker-compose
   git
   helm
-  helm
   httpie
   kubectl
   mvn
