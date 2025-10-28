@@ -33,7 +33,7 @@ error() {
 }
 
 if ! chezmoi="$(command -v chezmoi)"; then
-  bin_dir="${HOME}/.local/bin"
+  bin_dir="$(mktemp -d)/bin"
   chezmoi="${bin_dir}/chezmoi"
   log_task "Installing chezmoi to '${chezmoi}'"
   if command -v curl >/dev/null; then

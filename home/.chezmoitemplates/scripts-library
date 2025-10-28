@@ -83,7 +83,7 @@ function sudo() {
 
   # shellcheck disable=SC2312
   if [[ "$(id -u)" -eq 0 ]]; then
-    if [[ "${exec}" == "true" ]]; then
+    if [[ "${exec}" == true ]]; then
       exec "$@"
     else
       "$@"
@@ -93,7 +93,7 @@ function sudo() {
       log_manual_action "Root privileges are required, please enter your password below"
       command sudo --validate
     fi
-    if [[ "${exec}" == "true" ]]; then
+    if [[ "${exec}" == true ]]; then
       exec sudo "$@"
     else
       command sudo "$@"
@@ -108,7 +108,7 @@ function is_apt_package_installed() {
 }
 
 function not_during_test() {
-  if [[ "${DOTFILES_TEST:-}" == "true" ]]; then
+  if [[ "${DOTFILES_TEST:-}" == true ]]; then
     log_info "Skipping '${*}' because we are in test mode"
   else
     "${@}"
@@ -122,26 +122,5 @@ function service_exists() {
     return 0
   else
     return 1
-  fi
-}
-
-
-function gsettings_ensure() {
-  local schema="$1"
-  local key="$2"
-  local value="$3"
-  local extension="${4:-}"
-
-  local first_args=()
-  if [[ -n "${extension}" ]]; then
-    first_args+=(--schemadir "${HOME}/.local/share/gnome-shell/extensions/${extension}/schemas")
-  fi
-
-  local current_value
-  current_value="$(gsettings "${first_args[@]}" get "${schema}" "${key}")"
-
-  if [[ "${current_value}" != "${value}" && "${current_value}" != "'${value}'" ]]; then
-    log_task "Setting ${schema}.${key} to ${value}"
-    gsettings "${first_args[@]}" set "${schema}" "${key}" "${value}"
   fi
 }

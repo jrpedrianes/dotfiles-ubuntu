@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # {{ template "scripts-library" }}
 
@@ -19,6 +19,7 @@ if command -v script >/dev/null && [[ ! -d "${HOME}/.cache/gitstatus" ]]; then
   bash -e <<'EOF' >/dev/null
 # We need to be in a git repository, so gitstatusd initiliazes
 cd '{{ .chezmoi.workingTree }}'
+
 # We also need to emulate a TTY
 script -qec "zsh -is </dev/null" /dev/null
 EOF

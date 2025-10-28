@@ -5,6 +5,10 @@
 # The following line is for ShellCheck to correctly identify the above include
 true || source ../../.chezmoitemplates/scripts-library
 
+function gext() {
+  uvx gnome-extensions-cli "$@"
+}
+
 if [[ "${CONTINUE_FROM_DOTFILES:-false}" == false ]]; then
   if chezmoi --version &>/dev/null; then
     log_task "Updating dotfiles"
@@ -36,7 +40,7 @@ if flatpak --version &>/dev/null; then
   c sudo flatpak update --assumeyes
 fi
 
-if command -v gnome-shell-extension-installer >/dev/null; then
+if gext --version &>/dev/null; then
   log_task "Updating gnome extensions"
-  c gnome-shell-extension-installer --update --yes
+  c gext update --yes --user
 fi
