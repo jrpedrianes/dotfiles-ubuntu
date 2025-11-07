@@ -6,7 +6,7 @@ MC_DISABLE_PAGER = "true"
 
 [tools]
 bitwarden = "2025.10.0"
-chezmoi = "2.66.1"
+chezmoi = "2.67.0"
 cosign = "3.0.2"
 jq = "1.8.1"
 kubectl = "1.32.6"
