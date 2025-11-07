@@ -1,9 +1,8 @@
-{{- /* "chezmoi" is present as work around for https://github.com/twpayne/chezmoi/discussions/1724 */ -}}
-{{- $cache := dict "chezmoi" .chezmoi -}}
+{{- /* Chezmoi External */ -}}
 
-{{- template "read-versions-and-revisions-cache" $cache -}}
+{{- /* Avoid IDE errors */ -}}
 
-{{ $omzRevision := includeTemplate "get-github-head-revision" (list "ohmyzsh/ohmyzsh" $cache) }}
+{{ $omzRevision := includeTemplate "get-github-head-revision" "ohmyzsh/ohmyzsh" }}
 ".oh-my-zsh":
   type: archive
   url: "https://github.com/ohmyzsh/ohmyzsh/archive/{{ $omzRevision }}.tar.gz"
@@ -11,34 +10,34 @@
   # waiting for https://github.com/twpayne/chezmoi/issues/1614#issuecomment-966524408
   # exact: true
 
-{{ $zshSyntaxHighlightingRevision := includeTemplate "get-github-head-revision" (list "zsh-users/zsh-syntax-highlighting" $cache) }}
+{{ $zshSyntaxHighlightingRevision := includeTemplate "get-github-head-revision" "zsh-users/zsh-syntax-highlighting" }}
 ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting":
   type: archive
   url: "https://github.com/zsh-users/zsh-syntax-highlighting/archive/{{ $zshSyntaxHighlightingRevision }}.tar.gz"
   stripComponents: 1
   exact: true
 
-{{ $zshAutosuggestionsRevision := includeTemplate "get-github-head-revision" (list "zsh-users/zsh-autosuggestions" $cache) }}
+{{ $zshAutosuggestionsRevision := includeTemplate "get-github-head-revision" "zsh-users/zsh-autosuggestions" }}
 ".oh-my-zsh/custom/plugins/zsh-autosuggestions":
   type: archive
   url: "https://github.com/zsh-users/zsh-autosuggestions/archive/{{ $zshAutosuggestionsRevision }}.tar.gz"
   stripComponents: 1
   exact: true
 
-{{ $zshCompletionsRevision := includeTemplate "get-github-head-revision" (list "zsh-users/zsh-completions" $cache) }}
+{{ $zshCompletionsRevision := includeTemplate "get-github-head-revision" "zsh-users/zsh-completions" }}
 ".oh-my-zsh/custom/plugins/zsh-completions":
   type: archive
   url: "https://github.com/zsh-users/zsh-completions/archive/{{ $zshCompletionsRevision }}.tar.gz"
   stripComponents: 1
   exact: true
 
-{{ $kubeswitchVersion := includeTemplate "get-github-latest-version" (list "danielfoehrKn/kubeswitch" $cache) }}
+{{ $kubeswitchVersion := includeTemplate "get-github-latest-version" "danielfoehrKn/kubeswitch" }}
 ".local/bin/switcher":
   type: file
   url: "https://github.com/danielfoehrKn/kubeswitch/releases/download/{{ $kubeswitchVersion }}/switcher_linux_{{ .chezmoi.arch }}"
   executable: true
 
-{{ $kubecolorVersion := includeTemplate "get-github-latest-version" (list "kubecolor/kubecolor" $cache) }}
+{{ $kubecolorVersion := includeTemplate "get-github-latest-version" "kubecolor/kubecolor" }}
 ".local/bin/kubecolor":
   type: file
   url: "https://github.com/kubecolor/kubecolor/releases/download/v{{ $kubecolorVersion }}/kubecolor_{{ $kubecolorVersion }}_linux_{{ .chezmoi.arch }}.tar.gz"
@@ -47,7 +46,7 @@
     args: ["-x", "-z", "-O", "kubecolor"]
   executable: true
 
-{{ $starshipVersion := includeTemplate "get-github-latest-version" (list "starship/starship" $cache) }}
+{{ $starshipVersion := includeTemplate "get-github-latest-version" "starship/starship" }}
 ".local/bin/starship":
   type: file
   url: "https://github.com/starship/starship/releases/download/v{{ $starshipVersion }}/starship-{{ .uname_arch }}-unknown-linux-gnu.tar.gz"
@@ -56,12 +55,12 @@
     args: ["-x", "-z", "-O", "starship"]
   executable: true
 
-{{ $nerdFontsVersion := includeTemplate "get-github-latest-version" (list "ryanoasis/nerd-fonts" $cache) }}
+{{ $nerdFontsVersion := includeTemplate "get-github-latest-version" "ryanoasis/nerd-fonts" }}
 "{{ joinPath .fontsDir .terminalFont.fileName }}":
   type: file
   url: "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v{{ $nerdFontsVersion }}/patched-fonts/FiraCode/Regular/FiraCodeNerdFontMono-Regular.ttf"
 
-{{ $lazydockerVersion := includeTemplate "get-github-latest-version" (list "jesseduffield/lazydocker" $cache) }}
+{{ $lazydockerVersion := includeTemplate "get-github-latest-version" "jesseduffield/lazydocker" }}
 ".local/bin/lazydocker":
   type: file
   url: "https://github.com/jesseduffield/lazydocker/releases/download/v{{ $lazydockerVersion }}/lazydocker_{{ $lazydockerVersion }}_Linux_{{ .uname_arch }}.tar.gz"
@@ -70,7 +69,7 @@
     args: ["-x", "-z", "-O", "lazydocker"]
   executable: true
 
-{{ $lazygitVersion := includeTemplate "get-github-latest-version" (list "jesseduffield/lazygit" $cache) }}
+{{ $lazygitVersion := includeTemplate "get-github-latest-version" "jesseduffield/lazygit" }}
 ".local/bin/lazygit":
   type: file
   url: "https://github.com/jesseduffield/lazygit/releases/download/v{{ $lazygitVersion }}/lazygit_{{ $lazygitVersion }}_linux_{{ .uname_arch }}.tar.gz"
@@ -78,5 +77,3 @@
     command: tar
     args: ["-x", "-z", "-O", "lazygit"]
   executable: true
-
-{{- template "save-versions-and-revisions-cache" $cache -}}
