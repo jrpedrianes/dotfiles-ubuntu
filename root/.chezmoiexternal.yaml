@@ -48,13 +48,6 @@
     command: gpg
     args: ["--dearmor"]
 
-"usr/share/keyrings/spotify.gpg":
-  type: file
-  url: "https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg"
-  filter:
-    command: gpg
-    args: ["--dearmor"]
-
 "usr/share/keyrings/pipewire-extra-bt-codecs.gpg":
   type: file
   url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x018608be284ad8ee9e90e44ce265bd42d7e7e88c"
