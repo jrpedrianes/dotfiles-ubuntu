@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# {{ include (joinPath .chezmoi.sourceDir ".chezmoitemplates/scripts-library") }}
+
+# The following line is for ShellCheck to correctly identify the above included library
+true || source ../.chezmoitemplates/scripts-library
+
+readonly unwanted_packages=(
+  # Replaced by openjdk-21-jre
+  openjdk-11-jre
+)
+
+for package in "${unwanted_packages[@]}"; do
+  # shellcheck disable=SC2310
+  if is_apt_package_installed "${package}"; then
+    log_task "Removing unwanted package '${package}' installed with APT"
+    c env DEBIAN_FRONTEND=noninteractive apt remove --yes --auto-remove "${package}"
+  fi
+done
