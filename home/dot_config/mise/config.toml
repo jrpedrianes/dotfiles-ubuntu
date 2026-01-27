@@ -5,12 +5,12 @@ pin = true
 MC_DISABLE_PAGER = "true"
 
 [tools]
-bitwarden = "2025.10.0"
-chezmoi = "2.67.0"
-cosign = "3.0.2"
+bitwarden = "2025.12.0"
+chezmoi = "2.69.3"
+cosign = "3.0.4"
 jq = "1.8.1"
 kubectl = "1.32.6"
 mc = "2025-07-21T05-28-08Z"
-usage = "2.5.1"
-uv = "0.9.5"
-yq = "4.48.1"
+usage = "2.15.0"
+uv = "0.9.27"
+yq = "4.50.1"
