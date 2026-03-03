@@ -83,6 +83,13 @@
     command: gpg
     args: ["--dearmor"]
 
+"usr/share/keyrings/oracle-virtualbox-2016.gpg":
+  type: file
+  url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+  filter:
+    command: gpg
+    args: ["--dearmor"]
+
 "usr/share/keyrings/mise-archive-keyring.gpg":
   type: file
   url: "https://mise.jdx.dev/gpg-key.pub"

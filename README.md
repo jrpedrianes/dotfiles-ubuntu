@@ -10,10 +10,6 @@ https://github.com/felipecrs/dotfiles/tree/master
 Pending parts to script
 -------------------------
 
-https://www.virtualbox.org/wiki/Linux_Downloads
-
-https://gist.github.com/the-spyke/2de98b22ff4f978ebf0650c90e82027e?permalink_comment_id=3976215
-
 ### JetBrains Toolbox Installation
 
 Installing JetBrains Toolbox manually from https://www.jetbrains.com/toolbox-app/
@@ -38,4 +34,14 @@ to cause performance issues), add the following configuration to `${HOME}/.local
     "graphics_api": "Software"
   }
 }
+```
+
+### Wayland Configuration for JetBrains IDEs
+
+Since I'm using Wayland, I need to configure the IDE settings to avoid blurry rendering:
+
+Add the following VM option to the IDE settings:
+
+```
+-Dawt.toolkit.name=WLToolkit
 ```
