@@ -90,6 +90,13 @@
     command: gpg
     args: ["--dearmor"]
 
+"usr/share/keyrings/git-core-ppa.gpg":
+  type: file
+  url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xE1DD270288B4E6030699E45FA1715D88E1DF1F24"
+  filter:
+    command: gpg
+    args: ["--dearmor"]
+
 "usr/share/keyrings/mise-archive-keyring.gpg":
   type: file
   url: "https://mise.jdx.dev/gpg-key.pub"
