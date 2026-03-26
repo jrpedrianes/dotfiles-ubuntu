@@ -1,0 +1,8 @@
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+Types: deb
+URIs: https://download.docker.com/linux/{{ .chezmoi.osRelease.id }}
+Suites: {{ .chezmoi.osRelease.versionCodename }}
+Components: stable
+Architectures: {{ .chezmoi.arch }}
+Signed-By: /usr/share/keyrings/docker-archive-keyring.gpg

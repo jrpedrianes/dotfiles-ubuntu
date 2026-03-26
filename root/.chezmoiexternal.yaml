@@ -55,13 +55,6 @@
     command: gpg
     args: ["--dearmor"]
 
-"usr/share/keyrings/pipewire-extra-bt-codecs.gpg":
-  type: file
-  url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x018608be284ad8ee9e90e44ce265bd42d7e7e88c"
-  filter:
-    command: gpg
-    args: ["--dearmor"]
-
 "usr/share/keyrings/stripe.gpg":
   type: file
   url: "https://packages.stripe.dev/api/security/keypair/stripe-cli-gpg/public"
@@ -79,13 +72,6 @@
 "usr/share/keyrings/postgresql.gpg":
   type: file
   url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
-  filter:
-    command: gpg
-    args: ["--dearmor"]
-
-"usr/share/keyrings/oracle-virtualbox-2016.gpg":
-  type: file
-  url: "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
   filter:
     command: gpg
     args: ["--dearmor"]

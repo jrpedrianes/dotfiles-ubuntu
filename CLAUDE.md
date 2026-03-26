@@ -12,18 +12,18 @@ Chezmoi-based Ubuntu dotfiles managing both user (`$HOME`) and root (`/`) system
 
 ```
 home/                              # User config (chezmoi source, set by .chezmoiroot)
-├── .chezmoi.yaml.tmpl            # Interactive config (name, email, GNOME detection)
-├── .chezmoiexternal.yaml         # GitHub archives: oh-my-zsh, starship, lazydocker, etc.
+├── .chezmoi.yaml.tmpl            # Interactive config (name, email)
+├── .chezmoiexternal.yaml         # GitHub archives: oh-my-zsh, starship, nerd-font, kubeswitch, kubecolor
 ├── .chezmoitemplates/            # Shared utilities (scripts-library, GitHub version helpers)
-├── .chezmoiscripts/              # User provisioning scripts
-├── dot_local/bin/                # rootmoi wrapper, full-upgrade script
-└── dot_config/, dot_shell/, ...  # Dotfiles
+├── .chezmoiscripts/              # User provisioning scripts + GNOME config
+├── dot_local/bin/                # rootmoi wrapper, full-upgrade
+└── dot_config/, dot_shell/, ...  # Dotfiles (git, zsh, starship, mise, ghostty, ssh, docker, kube)
 
 root/                              # System config (applied via rootmoi as sudo)
 ├── .chezmoiexternal.yaml         # GPG keys for APT repos + docker-credential-secretservice
 ├── .chezmoitemplates -> ../home/.chezmoitemplates  # Symlink to shared templates
-├── .chezmoiscripts/              # System provisioning scripts
-└── etc/apt/sources.list.d/       # Third-party APT sources (templated)
+├── .chezmoiscripts/              # System provisioning (APT, snap, docker, keystore-explorer, etc.)
+└── etc/                          # APT sources (DEB822 format), sysctl config
 ```
 
 **Execution flow:** `install.sh` → chezmoi init (home/) → user scripts run → `run_after_20` invokes rootmoi → root scripts run.
@@ -75,6 +75,39 @@ DOTFILES_DEBUG=true chezmoi apply
 
 # Test mode (skips certain operations)
 DOTFILES_TEST=true chezmoi apply
+```
+
+## Cleanup Context (2026-03-26)
+
+Repo was cleaned up for fresh Ubuntu 24.04 install. Removed unused tools/configs, migrated all APT sources to DEB822 format.
+
+Everything removed is recoverable from git history (commit before cleanup: `bb996fe`).
+
+### What was removed
+- **Input-remapper:** install script + config
+- **mpris-proxy:** systemd service + configure script
+- **Apps:** discord, snap packages (simple-scan, onlyoffice)
+- **Tools:** lazygit, lazydocker, zfs-rollback
+- **Zsh plugins removed:** Angular CLI autocompletion
+- **Other:** `dot_testcontainers.properties`
+
+### What was kept
+- **Shell:** zsh, oh-my-zsh, starship, fzf, bitwarden plugin, 1password plugin
+- **Git:** gitconfig, git-core-ppa
+- **Docker:** full stack (ce, compose, buildx, credential-secretservice, docker group, daemon restart)
+- **Kubernetes:** kubeswitch, kubecolor, dot_kube, helm/kubectl/switcher zsh plugins
+- **GNOME:** extensions install + gsettings config
+- **APT packages:** 1password, bruno, btop, code, gnome-tweaks, gnome-shell-extension-manager, httpie, postgresql-client-16, stripe, sublime-text, wireguard + build libs
+- **Snap:** spotify, ghostty
+- **Other:** keystore-explorer, full-upgrade, sysctl intellij config, ssh config, ghostty config, claude config, mise
+
+### To restore something
+```bash
+# See all deleted files
+git diff bb996fe --diff-filter=D --name-only
+
+# Restore a specific file
+git checkout bb996fe -- path/to/file
 ```
 
 ## Commit Convention
