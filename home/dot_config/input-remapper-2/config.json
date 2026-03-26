@@ -1,5 +1,5 @@
 {
-    "version": "1.5.1",
+    "version": "2.2.0",
     "autoload": {
         "MX Keys Mini Keyboard": "custom"
     },

@@ -21,7 +21,7 @@ Current steps:
 4. **Issue**: The app should automatically copy itself to `$HOME/.local/share/JetBrains/Toolbox/bin` but this is not happening
 5. **Workaround**: Manually copying the binary to the expected directory
 
-Reference: https://www.jetbrains.com/help/toolbox-app/toolbox-app-silent-installation.html#toolbox_linux
+Reference: https://www.jetbrains.com/help/toolbox-app/installation.html#toolbox_linux
 
 ### JetBrains Toolbox Configuration for Xorg
 
