@@ -10,6 +10,11 @@ window-padding-y = 5
 
 copy-on-select = clipboard
 
+# Convert TERM from xterm-ghostty to xterm-256color during SSH and propagate
+# COLORTERM/TERM_PROGRAM/TERM_PROGRAM_VERSION. Prevents vim/tmux/less from
+# breaking on remote hosts that lack the ghostty terminfo entry.
+shell-integration-features = ssh-env
+
 # Ctrl+C - Interrupt (Cancel)
 keybind = ctrl+c=text:\x03
 
