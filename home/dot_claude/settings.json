@@ -1,8 +1,11 @@
 {
-  "effortLevel": "high",
-  "theme": "dark",
-  "tui": "fullscreen",
   "env": {
     "ENABLE_LSP_TOOL": "1"
-  }
+  },
+  "enabledPlugins": {
+    "jdtls-lsp@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "tui": "fullscreen",
+  "theme": "dark"
 }
