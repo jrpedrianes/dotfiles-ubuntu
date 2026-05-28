@@ -1,5 +1,8 @@
 {
   "effortLevel": "high",
   "theme": "dark",
-  "tui": "fullscreen"
+  "tui": "fullscreen",
+  "env": {
+    "ENABLE_LSP_TOOL": "1"
+  }
 }
