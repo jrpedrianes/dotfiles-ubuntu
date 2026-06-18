@@ -35,6 +35,7 @@ readonly wanted_packages=(
   libxml2-dev
   libxmlsec1-dev
   mise
+  msodbcsql18 # Microsoft ODBC Driver 18 for SQL Server
   net-tools
   postgresql-client-16
   stripe
@@ -57,5 +58,6 @@ if [[ ${#missing_packages[@]} -gt 0 ]]; then
   log_task "Installing missing packages with APT: ${missing_packages[*]}"
 
   c apt update --yes
-  c apt install --yes --no-install-recommends "${missing_packages[@]}"
+  # ACCEPT_EULA=Y is required by msodbcsql18 to install non-interactively
+  c env DEBIAN_FRONTEND=noninteractive ACCEPT_EULA=Y apt install --yes --no-install-recommends "${missing_packages[@]}"
 fi
