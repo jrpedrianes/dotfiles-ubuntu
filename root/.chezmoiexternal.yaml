@@ -16,7 +16,7 @@
     command: gpg
     args: ["--dearmor"]
 
-"usr/share/keyrings/google-chrome-archive-keyring.gpg":
+"usr/share/keyrings/google-chrome.gpg":
   type: file
   url: "https://dl.google.com/linux/linux_signing_key.pub"
   filter:
