@@ -3,7 +3,8 @@
     "ENABLE_LSP_TOOL": "1"
   },
   "enabledPlugins": {
-    "jdtls-lsp@claude-plugins-official": true
+    "jdtls-lsp@claude-plugins-official": true,
+    "kuflow@kuflow-skills": true
   },
   "effortLevel": "high",
   "tui": "fullscreen",
