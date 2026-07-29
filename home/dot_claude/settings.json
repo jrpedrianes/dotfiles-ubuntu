@@ -2,13 +2,7 @@
   "env": {
     "ENABLE_LSP_TOOL": "1"
   },
-  "enabledPlugins": {
-    "jdtls-lsp@claude-plugins-official": true,
-    "kuflow@kuflow-skills": true
-  },
-  "effortLevel": "high",
-  "tui": "fullscreen",
-  "theme": "dark",
+  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {
@@ -21,5 +15,12 @@
         ]
       }
     ]
-  }
+  },
+  "enabledPlugins": {
+    "jdtls-lsp@claude-plugins-official": true,
+    "kuflow@kuflow-skills": true
+  },
+  "effortLevel": "high",
+  "tui": "fullscreen",
+  "theme": "dark"
 }
