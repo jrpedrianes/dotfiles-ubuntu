@@ -19,20 +19,24 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    export PATH="$HOME/bin:$PATH"
-fi
+# Prepend a directory to PATH if it exists and is not already there.
+# ~/.config/environment.d/999-path.conf already injects some of these for the
+# graphical session, so guard against duplicated entries.
+prepend_path() {
+    [ -d "$1" ] || return 0
+    case ":${PATH}:" in
+        *":$1:"*) ;;
+        *) PATH="$1:${PATH}" ;;
+    esac
+}
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+prepend_path "$HOME/bin"
+prepend_path "$HOME/.local/bin"
+prepend_path "$HOME/.local/share/JetBrains/Toolbox/scripts"
+export PATH
 
-# set PATH so it includes Toolbox App if it exists
-if [ -d "$HOME/.local/share/JetBrains/Toolbox/scripts" ] ; then
-    export PATH="$HOME/.local/share/JetBrains/Toolbox/scripts:$PATH"
-fi
+# .zshrc sources this file, so do not leak the helper into interactive shells
+unset -f prepend_path
 
 # configure Claude Code
 if [ -f "$HOME/.claude/settings.json" ] ; then
