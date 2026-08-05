@@ -69,7 +69,7 @@
 {{ $nerdFontsVersion := includeTemplate "get-github-latest-version" "ryanoasis/nerd-fonts" }}
 "{{ joinPath .fontsDir .terminalFont.fileName }}":
   type: file
-  url: "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/v{{ $nerdFontsVersion }}/patched-fonts/FiraCode/Regular/FiraCodeNerdFontMono-Regular.ttf"
+  url: "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/refs/tags/v{{ $nerdFontsVersion }}/patched-fonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf"
 
 {{/* TEMPORARILY DISABLED: download.eclipse.org returned a DB outage and the build
      timestamp scrape (get-jdtls-build-timestamp) fails, aborting the whole apply.
