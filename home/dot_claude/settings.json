@@ -1,5 +1,4 @@
 {
-  "outputStyle": "Concise",
   "env": {
     "ENABLE_LSP_TOOL": "1"
   },
@@ -21,6 +20,7 @@
     "jdtls-lsp@claude-plugins-official": true,
     "kuflow@kuflow-skills": true
   },
+  "outputStyle": "Concise",
   "effortLevel": "high",
   "tui": "fullscreen",
   "theme": "dark"
