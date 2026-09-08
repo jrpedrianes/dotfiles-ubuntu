@@ -1,5 +1,9 @@
 [settings]
 pin = true
+# Defaults to true. Since mise v2026.9.0 (https://github.com/jdx/mise/releases#release-v2026.9.0),
+# when enabled it keeps the shims dir in PATH as a fallback on top of `mise activate`, so missing
+# tools resolve through their shim and get installed lazily. Disabled to keep shims out of PATH.
+not_found_auto_install = false
 
 [env]
 MC_DISABLE_PAGER = "true"
