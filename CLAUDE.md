@@ -42,7 +42,19 @@ Three files needed:
 Template variables for sources: `{{ .chezmoi.arch }}`, `{{ .chezmoi.osRelease.versionCodename }}`, `{{ .chezmoi.osRelease.id }}`.
 
 ### Adding a new GitHub binary tool
-Add entry to `home/.chezmoiexternal.yaml` using `includeTemplate "get-github-latest-version"` for version resolution. Uses `{{ .chezmoi.arch }}` or `{{ .uname_arch }}` for platform-specific downloads.
+Add entry to `home/.chezmoiexternal.yaml` using chezmoi's native `gitHubLatestReleaseAssetURL "owner/repo" "<glob>"`, which resolves version *and* asset URL in one call — no hand-built download URLs. Use `printf` to inject `.chezmoi.arch` or `.uname_arch` into the glob for platform-specific assets.
+
+```yaml
+".local/bin/kubecolor":
+  type: file
+  url: "{{ gitHubLatestReleaseAssetURL "kubecolor/kubecolor" (printf "kubecolor_*_linux_%s.tar.gz" .chezmoi.arch) }}"
+```
+
+When the download is *not* a release asset (e.g. a `raw.githubusercontent.com` path), use `(gitHubLatestRelease "owner/repo").TagName` or `(gitHubLatestTag "owner/repo").Name` instead.
+
+These funcs hit the GitHub API (60 req/h anonymous), so both configs set `gitHub.refreshPeriod: 24h` to cache responses — new upstream releases are picked up once a day. Note `rootmoi` runs under `sudo` with only `PATH` preserved, so no `GITHUB_TOKEN` reaches root's chezmoi.
+
+For repos without releases, `home/.chezmoitemplates/get-github-head-revision` resolves the default branch's HEAD SHA (chezmoi has no native equivalent).
 
 ### Removing an APT package
 Add to `root/.chezmoiscripts/run_before_30-uninstall-apt-packages.sh.tmpl` in `unwanted_packages` array (runs before install).

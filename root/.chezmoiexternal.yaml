@@ -90,8 +90,7 @@
     command: gpg
     args: ["--dearmor"]
 
-{{ $dockerCredentialSecretServiceVersion := includeTemplate "get-github-latest-version" "docker/docker-credential-helpers" }}
 "usr/bin/docker-credential-secretservice":
   type: file
-  url: "https://github.com/docker/docker-credential-helpers/releases/download/v{{ $dockerCredentialSecretServiceVersion }}/docker-credential-secretservice-v{{ $dockerCredentialSecretServiceVersion }}.{{ .chezmoi.os }}-{{ .chezmoi.arch }}"
+  url: "{{ gitHubLatestReleaseAssetURL "docker/docker-credential-helpers" (printf "docker-credential-secretservice-*.%s-%s" .chezmoi.os .chezmoi.arch) }}"
   executable: true

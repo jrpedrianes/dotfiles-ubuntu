@@ -66,6 +66,12 @@ verbose: true
 # https://github.com/twpayne/chezmoi/issues/3257
 pager: ""
 
+# Externals resolve versions/assets via the GitHub API, which is rate limited to
+# 60 req/h without a token. The default 1m cache would burn through that in a few
+# applies, so we check for new upstream releases once a day instead.
+gitHub:
+  refreshPeriod: "24h"
+
 diff:
   exclude:
     - scripts

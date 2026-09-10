@@ -31,54 +31,46 @@
   stripComponents: 1
   exact: true
 
-{{ $kubeswitchVersion := includeTemplate "get-github-latest-version" "danielfoehrKn/kubeswitch" }}
 ".local/bin/switcher":
   type: file
-  url: "https://github.com/danielfoehrKn/kubeswitch/releases/download/{{ $kubeswitchVersion }}/switcher_linux_{{ .chezmoi.arch }}"
+  url: "{{ gitHubLatestReleaseAssetURL "danielfoehrKn/kubeswitch" (printf "switcher_linux_%s" .chezmoi.arch) }}"
   executable: true
 
-{{ $kubecolorVersion := includeTemplate "get-github-latest-version" "kubecolor/kubecolor" }}
 ".local/bin/kubecolor":
   type: file
-  url: "https://github.com/kubecolor/kubecolor/releases/download/v{{ $kubecolorVersion }}/kubecolor_{{ $kubecolorVersion }}_linux_{{ .chezmoi.arch }}.tar.gz"
+  url: "{{ gitHubLatestReleaseAssetURL "kubecolor/kubecolor" (printf "kubecolor_*_linux_%s.tar.gz" .chezmoi.arch) }}"
   filter:
     command: tar
     args: ["-x", "-z", "-O", "kubecolor"]
   executable: true
 
-{{ $starshipVersion := includeTemplate "get-github-latest-version" "starship/starship" }}
 ".local/bin/starship":
   type: file
-  url: "https://github.com/starship/starship/releases/download/v{{ $starshipVersion }}/starship-{{ .uname_arch }}-unknown-linux-gnu.tar.gz"
+  url: "{{ gitHubLatestReleaseAssetURL "starship/starship" (printf "starship-%s-unknown-linux-gnu.tar.gz" .uname_arch) }}"
   filter:
     command: tar
     args: ["-x", "-z", "-O", "starship"]
   executable: true
 
-{{ $rtkVersion := includeTemplate "get-github-latest-version" "rtk-ai/rtk" }}
 {{ $rtkTarget := "x86_64-unknown-linux-musl" }}
 {{ if eq .chezmoi.arch "arm64" }}{{ $rtkTarget = "aarch64-unknown-linux-gnu" }}{{ end }}
 ".local/bin/rtk":
   type: file
-  url: "https://github.com/rtk-ai/rtk/releases/download/v{{ $rtkVersion }}/rtk-{{ $rtkTarget }}.tar.gz"
+  url: "{{ gitHubLatestReleaseAssetURL "rtk-ai/rtk" (printf "rtk-%s.tar.gz" $rtkTarget) }}"
   filter:
     command: tar
     args: ["-x", "-z", "-O", "rtk"]
   executable: true
 
-{{ $nerdFontsVersion := includeTemplate "get-github-latest-version" "ryanoasis/nerd-fonts" }}
+{{/* Not a release asset, so we need the tag to build a raw.githubusercontent.com URL */}}
+{{ $nerdFontsTag := (gitHubLatestRelease "ryanoasis/nerd-fonts").TagName }}
 "{{ joinPath .fontsDir .terminalFont.fileName }}":
   type: file
-  url: "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/refs/tags/v{{ $nerdFontsVersion }}/patched-fonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf"
+  url: "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/refs/tags/{{ $nerdFontsTag }}/patched-fonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf"
 
-{{/* TEMPORARILY DISABLED: download.eclipse.org returned a DB outage and the build
-     timestamp scrape (get-jdtls-build-timestamp) fails, aborting the whole apply.
-     Wrapped in a Go template comment so the includeTemplate calls below do NOT run
-     (a plain YAML "#" would not stop the template engine). Re-enable once Eclipse is back.
-
-{{ $jdtlsVersion := includeTemplate "get-github-latest-tag" "eclipse-jdtls/eclipse.jdt.ls" }}
+{{ $jdtlsVersion := (gitHubLatestTag "eclipse-jdtls/eclipse.jdt.ls").Name | trimPrefix "v" }}
 {{ $jdtlsBuild := includeTemplate "get-jdtls-build-timestamp" $jdtlsVersion }}
 ".local/share/jdtls":
   type: archive
   url: "https://download.eclipse.org/jdtls/milestones/{{ $jdtlsVersion }}/jdt-language-server-{{ $jdtlsVersion }}-{{ $jdtlsBuild }}.tar.gz"
-*/}}
+  exact: true

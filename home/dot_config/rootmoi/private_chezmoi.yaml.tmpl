@@ -9,6 +9,12 @@ umask: 022
 
 verbose: true
 
+# Same rationale as the user config: cache GitHub API responses so externals and
+# scripts do not exhaust the 60 req/h anonymous rate limit. Note that rootmoi runs
+# under sudo with only PATH preserved, so no GITHUB_TOKEN reaches this chezmoi.
+gitHub:
+  refreshPeriod: "24h"
+
 diff:
   exclude:
     - scripts
