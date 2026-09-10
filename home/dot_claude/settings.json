@@ -23,8 +23,5 @@
   "outputStyle": "Concise",
   "effortLevel": "high",
   "tui": "fullscreen",
-  "theme": "dark",
-  "permissions": {
-    "blockReadsOutsideWorkingDirectories": true
-  }
+  "theme": "dark"
 }
