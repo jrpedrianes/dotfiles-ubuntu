@@ -67,10 +67,3 @@
 "{{ joinPath .fontsDir .terminalFont.fileName }}":
   type: file
   url: "https://raw.githubusercontent.com/ryanoasis/nerd-fonts/refs/tags/{{ $nerdFontsTag }}/patched-fonts/FiraCode/FiraCodeNerdFontMono-Regular.ttf"
-
-{{ $jdtlsVersion := (gitHubLatestTag "eclipse-jdtls/eclipse.jdt.ls").Name | trimPrefix "v" }}
-{{ $jdtlsBuild := includeTemplate "get-jdtls-build-timestamp" $jdtlsVersion }}
-".local/share/jdtls":
-  type: archive
-  url: "https://download.eclipse.org/jdtls/milestones/{{ $jdtlsVersion }}/jdt-language-server-{{ $jdtlsVersion }}-{{ $jdtlsBuild }}.tar.gz"
-  exact: true
