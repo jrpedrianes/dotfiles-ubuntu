@@ -1,4 +1,9 @@
 {
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
   "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
@@ -29,7 +34,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash '{{ .chezmoi.homeDir }}/.claude/hooks/herdr-agent-state.sh' session",
+            "command": "bash '/home/jrodped/.claude/hooks/herdr-agent-state.sh' session",
             "timeout": 10
           }
         ]
@@ -54,6 +59,11 @@
   },
   "outputStyle": "Concise",
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
+  },
   "tui": "fullscreen",
   "theme": "dark"
 }
