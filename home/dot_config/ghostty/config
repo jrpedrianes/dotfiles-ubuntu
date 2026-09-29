@@ -27,3 +27,6 @@ keybind = ctrl+shift+right=goto_split:right
 keybind = ctrl+shift+up=goto_split:up
 keybind = ctrl+shift+down=goto_split:down
 
+# Free ctrl+enter for Claude Code (chat:sendNow); move fullscreen to F11
+keybind = ctrl+enter=unbind
+keybind = f11=toggle_fullscreen
