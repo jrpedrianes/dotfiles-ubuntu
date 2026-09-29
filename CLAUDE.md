@@ -41,6 +41,8 @@ Three files needed:
 
 Template variables for sources: `{{ .chezmoi.arch }}`, `{{ .chezmoi.osRelease.versionCodename }}`, `{{ .chezmoi.osRelease.id }}`.
 
+If the vendor's package rewrites its own key after install (e.g. Chrome's postinst + daily cron), chezmoi will prompt "has changed since chezmoi last wrote it". Make the key create-only by listing it in `root/.chezmoiignore` behind `{{ if stat "<path>" }}`.
+
 ### Adding a new GitHub binary tool
 Add entry to `home/.chezmoiexternal.yaml` using chezmoi's native `gitHubLatestReleaseAssetURL "owner/repo" "<glob>"`, which resolves version *and* asset URL in one call — no hand-built download URLs. Use `printf` to inject `.chezmoi.arch` or `.uname_arch` into the glob for platform-specific assets.
 

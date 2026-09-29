@@ -1,0 +1,4 @@
+{{- /* google-chrome-stable's postinst and daily cron rewrite this key; only bootstrap it */ -}}
+{{- if stat "/usr/share/keyrings/google-chrome.gpg" }}
+usr/share/keyrings/google-chrome.gpg
+{{- end }}
