@@ -1,0 +1,39 @@
+#!/bin/bash
+#!/bin/bash
+
+# {{ template "scripts-library" }}
+
+# The following line is for ShellCheck to correctly identify the above included library
+true || source ../.chezmoitemplates/scripts-library
+
+{{ if eq .chezmoi.arch "amd64" -}}
+{{ $release := gitHubLatestRelease "obsidianmd/obsidian-releases" -}}
+{{- $deb := "" -}}
+{{- range $release.Assets -}}
+{{-   if and (hasPrefix "obsidian_" .Name) (hasSuffix "_amd64.deb" .Name) -}}
+{{-     $deb = . -}}
+{{-   end -}}
+{{- end -}}
+{{- if not $deb -}}
+{{-   fail "obsidianmd/obsidian-releases: no obsidian_*_amd64.deb asset in the latest release" -}}
+{{- end }}
+
+# Upstream only publishes an amd64 .deb (arm64 gets AppImage/tar.gz only)
+obsidian_deb="{{ $deb.Name }}"
+obsidian_url="{{ $deb.BrowserDownloadURL }}"
+obsidian_version_latest="{{ $deb.Name | trimPrefix "obsidian_" | trimSuffix "_amd64.deb" }}"
+
+obsidian_version_current=$(dpkg-query -W --showformat='${Version}' obsidian 2> /dev/null || echo "NOT_FOUND")
+
+if [[ "${obsidian_version_latest}" != "${obsidian_version_current}" ]]; then
+  log_task "Installing obsidian - ${obsidian_version_latest}"
+
+  wget "${obsidian_url}" --directory-prefix=/tmp/
+
+  chmod u+r "/tmp/${obsidian_deb}"
+
+  c apt install --yes --no-install-recommends "/tmp/${obsidian_deb}"
+
+  rm -rf "/tmp/${obsidian_deb}"
+fi
+{{ end -}}
