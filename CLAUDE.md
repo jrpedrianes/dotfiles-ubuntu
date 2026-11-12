@@ -61,6 +61,10 @@ For repos without releases, `home/.chezmoitemplates/get-github-head-revision` re
 ### Removing an APT package
 Add to `root/.chezmoiscripts/run_before_30-uninstall-apt-packages.sh.tmpl` in `unwanted_packages` array (runs before install).
 
+### Claude Code install (`home/.chezmoiscripts/run_after_30-install-claude-code.sh.tmpl`)
+Bootstrapped with the native installer only when `~/.local/bin/claude` is missing. Not pinned in mise
+on purpose: the native install auto-updates itself.
+
 ### Claude Code settings (`home/dot_claude/settings.json.tmpl`)
 Templated so absolute paths resolve at apply-time via `{{ .chezmoi.homeDir }}` instead of being hardcoded.
 

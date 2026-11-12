@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# {{ template "scripts-library" }}
+
+# The following line is for ShellCheck to correctly identify the above included library
+true || source ../.chezmoitemplates/scripts-library
+
+# Native installer: Claude Code then auto-updates itself in the background,
+# so we only bootstrap it once and never pin a version here
+if [[ ! -x "${HOME}/.local/bin/claude" ]]; then
+  log_task "Installing Claude Code"
+
+  curl -fsSL https://claude.ai/install.sh | bash
+fi
