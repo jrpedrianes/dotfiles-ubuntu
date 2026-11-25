@@ -37,8 +37,3 @@ export PATH
 
 # .zshrc sources this file, so do not leak the helper into interactive shells
 unset -f prepend_path
-
-# configure Claude Code
-if [ -f "$HOME/.claude/settings.json" ] ; then
-    export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
-fi
