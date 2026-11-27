@@ -9,6 +9,16 @@
     "sessionUrl": false
   },
   "model": "opus[1m]",
+  "permissions": {
+    "deny": [
+      "Bash(kubectl *)",
+      "Bash(rtk kubectl *)",
+      "Bash(kubecolor *)",
+      "Bash(k9s *)",
+      "Bash(kubectl-1password-credential *)",
+      "Bash(keyctl *)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
